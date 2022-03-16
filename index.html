@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript DOM</title>
+    <link rel="stylesheet" href="./style.css">
+    <script>
+        function onSubmit(){
+            
+            //score check
+            for(let i = 0;i<4 ;i++){
+                
+                if(document.getElementById(i).checked){
+                    if(document.getElementById(i).value == questions[question_number].answer){
+                        score += 1;
+                    }
+                }
+            }
+            
+            question_number += 1;
+            if(question_number< questions.length){
+                //next Questiion
+                showQuestion(question_number);
+            }else{
+                //show result
+                showResult();
+            }
+        }
+
+
+        function showQuestion(question_number){
+            question.innerHTML = `${question_number + 1}. ${questions[question_number].question}`;
+            options.innerHTML = "";
+            for(var i = 0; i < questions[question_number].options.length; i++){
+                var option = document.createElement('div');
+                option.className = 'option';
+
+                var input = document.createElement('input');
+                input.type = "radio";
+                input.name = "options";
+                input.id = i;
+                input.value = questions[question_number].options[i];
+                var label = document.createElement('label');
+                label.innerHTML = questions[question_number].options[i];
+                option.appendChild(input);
+                option.appendChild(label);
+                options.appendChild(option);
+            }
+        }
+        function showResult(){
+            question.innerHTML = `You have scored ${score} out of 5!`;
+            document.getElementsByClassName('relode')[0].style.display = "block";
+            document.getElementsByClassName('submit')[0].style.display = "none";
+            options.innerHTML = "";
+            document.getElementsByClassName('questionSeq')[0].style.display = "none";
+        }
+        function relode(){
+            score = 0
+            question_number = 0;
+            buildQuiz();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <p class="'questionSeq"></p>
+        <h3 class="question"></h3>
+        <div class='options'>
+            <!-- radio inputs -->
+            
+        </div>
+        <button class="submit" onclick="onSubmit()">Submit</button>
+        <button class="relode" onclick="relode()">Reload</button>
+
+    </div>
+</body>
+<script>
+    var question = document.querySelector('.question');
+    var options = document.querySelector('.options');
+    var submit = document.querySelector('.submit');
+    var question_number = 0;
+    
+    var score = 0;
+    var questions = [
+        {
+            question: "What is the name of the first computer programmer?",
+            options: ["Charles Babbage", "Ada Lovelace", "Alan Turing", "Grace Hopper"],
+            answer: "Ada Lovelace"
+        },
+        {
+            question: "What is the name of the computer Inventor?",
+            options: ["Charles Babbage", "Lovelace", "Turing", "Hopper"],
+            answer: "Charles Babbage"
+        },
+        {
+            question: "What is the best JS framework?",
+            options: ["Angular", "Vue", "React", "TypeScript"],
+            answer: "React"
+        },
+        {
+            question: "What is the name of the first computer name?",
+            options: ["Intel", "Babbage Difference Engine", "AMD", "nVidia"],
+            answer: "Babbage Difference Engine"
+        },
+        {
+            question: "What is the latest intel Generation?",
+            options: ["Dual Core", "i3", "i7", "i9"],
+            answer: "i9"
+        }
+        ];
+        function buildQuiz(){
+            question_number = 0;
+            
+            document.getElementsByClassName('relode')[0].style.display = "none";
+            document.getElementsByClassName('submit')[0].style.display = 'block';
+            question.innerHTML = `${question_number + 1}. ${questions[question_number].question}`;
+            options.innerHTML = "";
+            for(var i = 0; i < questions[question_number].options.length; i++){
+                var option = document.createElement('div');
+                option.className = 'option';
+                var input = document.createElement('input');
+                input.type = "radio";
+                input.name = "options";
+                input.id = i;
+                input.value = questions[question_number].options[i];
+                var label = document.createElement('label');
+                label.innerHTML = questions[question_number].options[i];
+                option.appendChild(input);
+                option.appendChild(label);
+                options.appendChild(option);
+            }
+        }
+        buildQuiz();
+</script>
+</html>

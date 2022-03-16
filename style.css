@@ -1,0 +1,39 @@
+.container{
+    width: 350px;
+    background-color: aliceblue;
+    margin: 0px auto;
+    margin-top: 100px;
+    border-radius: 10px;
+}
+.question{
+   
+   
+    padding: 20px;
+}
+.options{
+    margin-left: 30px;
+    
+}
+.option{
+   padding: 10px;;
+}
+button{
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: coral;
+    color: white;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+button:active{
+    background-color: white;
+    color: coral;
+}
+
+body{
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
